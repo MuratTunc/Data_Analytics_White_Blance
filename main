@@ -1,0 +1,15 @@
+import matplotlib
+import PyQt5
+matplotlib.use('Qt4Agg')
+import matplotlib.pyplot as plt
+
+
+file_name = '/home/murat/Projects/Workbench/python/Data_Analytics/DATA/HAT2S_T5B_056T49-D51_23.10.2019.TXT'
+try:
+    f = open(file_name, 'r')
+    print(f.read())
+except:
+    print('Open FILE ERROR')
+finally:
+    f.close()
+

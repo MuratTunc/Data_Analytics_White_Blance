@@ -1,0 +1,17 @@
+
+REPO LINK:
+$ git clone https://github.com/MuratTunc/Data_Analytics_White_Blance.git
+
+$ git config --global user.email "murat.tunc8558@gmail.com"
+
+$ git config --global user.name "MuratTunc"
+
+$ echo "# Data_Analytics_White_Blance" >> README.md
+$ git init
+$ git add README.md
+$ git commit -m "first commit"
+$ git push -u origin master
+
+
+
+
