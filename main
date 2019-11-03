@@ -3,13 +3,30 @@ import PyQt5
 matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
 
-
-file_name = '/home/murat/Projects/Workbench/python/Data_Analytics/DATA/HAT2S_T5B_056T49-D51_23.10.2019.TXT'
+import cv2
+file_path = '/home/murat/Projects/WorkBench/Data_Science/DATA/HAT2S_T5B_056T49-D51_23.10.2019.TXT'
 try:
-    f = open(file_name, 'r')
-    print(f.read())
+    file = open(file_name, 'r')
 except:
     print('Open FILE ERROR')
 finally:
-    f.close()
+    file.close()
+
+
+#Repeat for each song in the text file
+for line in file:
+
+  #Let's split the line into an array called "fields" using the ";" as a separator:
+  fields = line.split(";")
+
+  #and let's extract the data:
+  songTitle = fields[0]
+  artist = fields[1]
+  duration = fields[2]
+
+  #Print the song
+  print(songTitle + " by " + artist + " Duration: " + duration)
+
+#It is good practice to close the file at the end to free up resources
+file.close()
 
