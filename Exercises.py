@@ -1,0 +1,60 @@
+
+
+
+"""
+str = '[ CA310_MINOLTA_Measurement: 	u= 1900	v= 4306	Lv= 306 ]'
+str_splt = str.split("	")
+#print(data[0])
+
+print(str_splt[1][-4:])
+print(str_splt[2][-4:])
+print(str_splt[3][-5:])
+
+#print(data[2])
+#print(data[3])
+
+
+
+
+
+
+
+        #First Measurement
+        current_line_number += 4
+        str_sub = current_line.split("	")
+        u_list[index] = str_sub[1][-4:]  #Get u value
+        v_list[index] = str_sub[2][-4:]  #Get v value
+        Lv_list[index] = str_sub[3][-5:] #Get Lv value
+        Factory_Comp_list[index] = 'X'   #No setting
+        Value_list[index] = 'X'          #No setting
+        index +=1
+
+        str2 = '[ SET_RgbGainOffset: 	ColorTempID= 0	Factory_Comp= 0	VALUE= 124 ]'
+str_splt = str2.split(":")
+
+
+
+#print(data[0])
+
+print(str_splt[0][2:])
+
+"""
+
+
+file_path = '/home/murat/Projects/Workbench/Data_Science/Data_Analytics_White_Blance/DATA/HAT2S_T5B_056T49-D51_23.10.2019.TXT'
+
+# Open file
+fileHandler = open(file_path, "r")
+
+# Get All lines
+listOfLines = fileHandler.readlines()
+Total_Line_Numbers = len(listOfLines)
+print('Total_Line_Numbers= ',Total_Line_Numbers)
+
+print(listOfLines[34])
+fileHandler.close()
+
+
+
+
+
