@@ -51,12 +51,15 @@ current_line_str = '[ SET_RgbGainOffset: 	ColorTempID= 7	Factory_Comp= 0	VALUE= 
 str_splt = current_line_str.split(":")
 str_sub = current_line_str.split("	")
 
-print(str_sub)
-print(str_sub[1][-1:])
+#print(str_sub)
+#print(str_sub[1][-1:])
 
 
+A = '[ CA310_MINOLTA_Measurement: 	u= 1893	v= 4461	Lv= 335 ]'
+sub_A = A.split("	")
+print(str_sub[3][-5:-2])
 
-print('eeeeeeeeeeee')
+
 
 for i in range(1, 5):
     Factory_Comp_list.insert(i, str_sub[1][-1:])
@@ -67,7 +70,7 @@ Factory_Comp_list.insert(1, 12)
 
 
 
-print(Factory_Comp_list)
+#print(Factory_Comp_list)
 
 
 

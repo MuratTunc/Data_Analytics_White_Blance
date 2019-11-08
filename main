@@ -23,7 +23,7 @@ with open(file_path, 'r') as f:
 Total_Line_Numbers = len(listOfLines)
 Factory_Comp_list = []
 Value_list = []
-Color_Temp = []
+Color_Temp_list = []
 u_list = []
 v_list = []
 Lv_list= []
@@ -54,7 +54,7 @@ while True:
                 #GET LINE-->[ SET_RgbGainOffset:
                 str_sub = current_line_str.split("	")
 
-                Color_Temp.insert(index_uv, str_sub[1][-1:])
+                Color_Temp_list.insert(index_uv, str_sub[1][-1:])
                 Factory_Comp_list.insert(index_uv, str_sub[2][-1:])
                 Value_list.insert(index_uv, str_sub[3][7:10])
 
@@ -64,7 +64,7 @@ while True:
                 str_sub = current_line_str.split("	")
                 u_list.insert(index_uv,str_sub[1][-4:])
                 v_list.insert(index_uv,str_sub[2][-4:])
-                Lv_list.insert(index_uv,str_sub[3][-5:])
+                Lv_list.insert(index_uv,str_sub[3][-5:-2])
 
                 index_uv += 1
 
@@ -74,4 +74,10 @@ while True:
         break
 
 print(current_line_index)
+
+print(Color_Temp_list)
+print(Factory_Comp_list)
+print (Value_list)
 print(u_list)
+print(v_list)
+print(Lv_list)
