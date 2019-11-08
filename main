@@ -5,7 +5,7 @@ matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
 
 WB_START_STRING = 'WHITE BALANCE ADJUSTMENT STEP LOG'
-RgbGainOffset_STRING = '[ SET_RgbGainOffset:'
+Set_RgbGainOffset_STRING = 'SET_RgbGainOffset'
 ColorTemp_0_STRING = 'SET_WBA_ColorTemp= 0'
 ColorTemp_1_STRING = 'SET_WBA_ColorTemp= 1'
 ColorTemp_2_STRING = 'SET_WBA_ColorTemp= 2'
@@ -17,79 +17,61 @@ Number_Of_TV = 0
 file_path = '/home/murat/Projects/Workbench/Data_Science/Data_Analytics_White_Blance/DATA/HAT2S_T5B_056T49-D51_23.10.2019.TXT'
 
 # Open file
-fileHandler = open(file_path, "r")
+with open(file_path, 'r') as f:
+    listOfLines = f.read().splitlines()
 
-# Get All lines
-listOfLines = list(fileHandler)   #fileHandler.readlines()
 Total_Line_Numbers = len(listOfLines)
-
-for line in listOfLines:
-    print(line)
-
-
-
-#print('Total_Line_Numbers= ',Total_Line_Numbers)
-
-print(listOfLines[34])
-
 Factory_Comp_list = []
 Value_list = []
+Color_Temp = []
 u_list = []
 v_list = []
 Lv_list= []
-current_line_str = ' '
+current_line_str = ''
+str_splt = ''
+str_sub = ''
 index_uv = 0
 index_uv_keep = 0
 line_index = 0
 current_line_index =0
 
 while True:
-    index_uv_keep = index_uv # keep index_uv for WB_NOk
+    index_uv_keep = index_uv # keep index_uv for WB_NOK
     current_line_str = listOfLines[current_line_index]
-    #print(listOfLines[current_line_index])
     if current_line_str == WB_START_STRING:
-
         while True:
             current_line_index += 1
             current_line_str = listOfLines[current_line_index]
-
-
+            str_splt = current_line_str.split(":")
             if current_line_str == WBA_RESULT_OK:
                 break
 
             if current_line_str == WBA_RESULT_NOK:
                 index_uv=index_uv_keep
+                break
 
-            if current_line_str == RgbGainOffset_STRING:
+            if (str_splt[0][2:]) == Set_RgbGainOffset_STRING:
                 #GET LINE-->[ SET_RgbGainOffset:
                 str_sub = current_line_str.split("	")
-                Factory_Comp_list[index_uv] = str_sub[2][-1:]  # Get "Comp Type" value
-                Value_list[index_uv] = str_sub[3][7:10]  # Get "VALUE" value
+
+                Color_Temp.insert(index_uv, str_sub[1][-1:])
+                Factory_Comp_list.insert(index_uv, str_sub[2][-1:])
+                Value_list.insert(index_uv, str_sub[3][7:10])
 
                 #GET LINE-->[ CA310_MINOLTA_Measurement:
                 current_line_index += 1
                 current_line_str = listOfLines[current_line_index]
                 str_sub = current_line_str.split("	")
-                u_list[index_uv] = str_sub[1][-4:]  # Get u value
-                v_list[index_uv] = str_sub[2][-4:]  # Get v value
-                Lv_list[index_uv] = str_sub[3][-5:]  # Get Lv value
+                u_list.insert(index_uv,str_sub[1][-4:])
+                v_list.insert(index_uv,str_sub[2][-4:])
+                Lv_list.insert(index_uv,str_sub[3][-5:])
 
                 index_uv += 1
 
 
     current_line_index += 1
-    if current_line_index==Total_Line_Numbers :
+    if current_line_index == Total_Line_Numbers:
         break
 
-
+print(current_line_index)
 print(u_list)
-
-
-
-
-
-
-
-# Close File
-fileHandler.close()
-
