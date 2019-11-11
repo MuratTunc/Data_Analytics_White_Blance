@@ -31,6 +31,7 @@ Color_Temp_list = []
 u_list = []
 v_list = []
 Lv_list= []
+Tv_Number = []
 current_line_str = ''
 str_splt = ''
 str_sub = ''
@@ -45,7 +46,7 @@ while True:
     current_line_str = listOfLines[current_line_index]
     if current_line_str == WB_START_STRING:
         while True:
-            Number_Of_TV +=1
+            Number_Of_TV += 1
             current_line_index += 1
             current_line_str = listOfLines[current_line_index]
 
@@ -61,7 +62,7 @@ while True:
                     v_list.insert(index_uv,str_sub[2][-4:])
                     Lv_list.insert(index_uv,str_sub[3][-5:-2])
 
-                    Color_Temp_list.insert(index_uv, '0' )
+                    Color_Temp_list.insert(index_uv, '0')
                     Factory_Comp_list.insert(index_uv, str(x))
                     Value_list.insert(index_uv, '128')
 
@@ -99,7 +100,7 @@ while True:
                     v_list.insert(index_uv,str_sub[2][-4:])
                     Lv_list.insert(index_uv,str_sub[3][-5:-2])
 
-                    Color_Temp_list.insert(index_uv, '1' )
+                    Color_Temp_list.insert(index_uv, '1')
                     Factory_Comp_list.insert(index_uv, str(x))
                     Value_list.insert(index_uv, '128')
 
@@ -137,7 +138,7 @@ while True:
                     v_list.insert(index_uv,str_sub[2][-4:])
                     Lv_list.insert(index_uv,str_sub[3][-5:-2])
 
-                    Color_Temp_list.insert(index_uv, '2' )
+                    Color_Temp_list.insert(index_uv, '2')
                     Factory_Comp_list.insert(index_uv, str(x))
                     Value_list.insert(index_uv, '128')
 
@@ -165,8 +166,6 @@ while True:
 
 
 
-
-
             if current_line_str == WBA_RESULT_OK:
                 break
 
@@ -175,27 +174,20 @@ while True:
                 break
 
 
-
-
     current_line_index += 1
     if current_line_index == Total_Line_Numbers:
         break
 
 
-
-
-
 #Adhust Result TEXT FILE
 String_To_Write = ' '
-Tab_Str=' '
+Tab_Str='   '
 End_Line = '\n'
 File_Result = open('/home/murat/Projects/WorkBench/Data_Science/Data_Analytics_White_Blance/DATA_MINED/Data_Mined.txt', 'w')
 
 for i in range(Number_Of_TV):
-    String_To_Write =Color_Temp_list[i] + Tab_Str + Factory_Comp_list[i] + Tab_Str + Value_list[i] + Tab_Str + u_list[i] + Tab_Str + v_list[i] + Tab_Str + Lv_list[i] + End_Line
+    String_To_Write = Color_Temp_list[i] + Tab_Str + Factory_Comp_list[i] + Tab_Str + Value_list[i] + Tab_Str + u_list[i] + Tab_Str + v_list[i] + Tab_Str + Lv_list[i] + End_Line
     File_Result.writelines(String_To_Write)
-
-
 
 
 print(current_line_index)
