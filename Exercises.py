@@ -42,7 +42,7 @@ Total_Line_Numbers = len(listOfLines)
 print(listOfLines[34])
 fileHandler.close()
 
-"""
+
 Color_Temp = []
 Factory_Comp_list = []
 Value_list = []
@@ -72,5 +72,10 @@ Factory_Comp_list.insert(1, 12)
 
 #print(Factory_Comp_list)
 
+"""
+import os
+import sys
+with open(os.path.join(sys.path[0], "HAT2S_T5B_056T49-D51_23.10.2019.TXT"), "r") as f:
+    print(f.read())
 
 
