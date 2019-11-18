@@ -78,4 +78,8 @@ import sys
 with open(os.path.join(sys.path[0], "HAT2S_T5B_056T49-D51_23.10.2019.TXT"), "r") as f:
     print(f.read())
 
+A = '0   0   128   1900   4306   306   1   OK'
+sub_A = A.split("   ")
+print(sub_A[0])
+
 

@@ -22,6 +22,8 @@ print(sys.path[0])
 with open(os.path.join(sys.path[0], file_name), "r") as f:
     listOfLines = f.read().splitlines()
 
+Enable_128 = False
+
 Number_Of_TV = 0
 Total_Line_Numbers = len(listOfLines)
 Factory_Comp_list = []
@@ -57,16 +59,16 @@ while True:
                 # GET LINE-->[ CA310_MINOLTA_Measurement:
                 current_line_str = listOfLines[current_line_index]
                 str_sub = current_line_str.split("	")
-
-                for x in range(3):
-                    index_uv += x
-                    u_list.insert(index_uv, str_sub[1][-4:])
-                    v_list.insert(index_uv, str_sub[2][-4:])
-                    Lv_list.insert(index_uv, str_sub[3][-5:-2])
-                    Color_Temp_list.insert(index_uv, '0')
-                    Factory_Comp_list.insert(index_uv, str(x))
-                    Value_list.insert(index_uv, '128')
-                    Tv_Number_list.insert(index_uv, str(Number_Of_TV))
+                if Enable_128:
+                    for x in range(3):
+                        index_uv += x
+                        u_list.insert(index_uv, str_sub[1][-4:])
+                        v_list.insert(index_uv, str_sub[2][-4:])
+                        Lv_list.insert(index_uv, str_sub[3][-5:-2])
+                        Color_Temp_list.insert(index_uv, '0')
+                        Factory_Comp_list.insert(index_uv, str(x))
+                        Value_list.insert(index_uv, '128')
+                        Tv_Number_list.insert(index_uv, str(Number_Of_TV))
 
                 while current_line_str != ColorTemp_1_STRING:
                     current_line_index += 1
@@ -96,16 +98,16 @@ while True:
                 # GET LINE-->[ CA310_MINOLTA_Measurement:
                 current_line_str = listOfLines[current_line_index]
                 str_sub = current_line_str.split("	")
-
-                for x in range(3):
-                    index_uv += x
-                    u_list.insert(index_uv, str_sub[1][-4:])
-                    v_list.insert(index_uv, str_sub[2][-4:])
-                    Lv_list.insert(index_uv, str_sub[3][-5:-2])
-                    Color_Temp_list.insert(index_uv, '1')
-                    Factory_Comp_list.insert(index_uv, str(x))
-                    Value_list.insert(index_uv, '128')
-                    Tv_Number_list.insert(index_uv, str(Number_Of_TV))
+                if Enable_128:
+                    for x in range(3):
+                        index_uv += x
+                        u_list.insert(index_uv, str_sub[1][-4:])
+                        v_list.insert(index_uv, str_sub[2][-4:])
+                        Lv_list.insert(index_uv, str_sub[3][-5:-2])
+                        Color_Temp_list.insert(index_uv, '1')
+                        Factory_Comp_list.insert(index_uv, str(x))
+                        Value_list.insert(index_uv, '128')
+                        Tv_Number_list.insert(index_uv, str(Number_Of_TV))
 
                 while current_line_str != ColorTemp_2_STRING:
                     current_line_index += 1
@@ -135,16 +137,16 @@ while True:
                 # GET LINE-->[ CA310_MINOLTA_Measurement:
                 current_line_str = listOfLines[current_line_index]
                 str_sub = current_line_str.split("	")
-
-                for x in range(3):
-                    index_uv += x
-                    u_list.insert(index_uv, str_sub[1][-4:])
-                    v_list.insert(index_uv, str_sub[2][-4:])
-                    Lv_list.insert(index_uv, str_sub[3][-5:-2])
-                    Color_Temp_list.insert(index_uv, '2')
-                    Factory_Comp_list.insert(index_uv, str(x))
-                    Value_list.insert(index_uv, '128')
-                    Tv_Number_list.insert(index_uv, str(Number_Of_TV))
+                if Enable_128:
+                    for x in range(3):
+                        index_uv += x
+                        u_list.insert(index_uv, str_sub[1][-4:])
+                        v_list.insert(index_uv, str_sub[2][-4:])
+                        Lv_list.insert(index_uv, str_sub[3][-5:-2])
+                        Color_Temp_list.insert(index_uv, '2')
+                        Factory_Comp_list.insert(index_uv, str(x))
+                        Value_list.insert(index_uv, '128')
+                        Tv_Number_list.insert(index_uv, str(Number_Of_TV))
 
                 while current_line_str != WBA_RESULT_OK:
                     current_line_index += 1
@@ -183,22 +185,89 @@ while True:
 String_To_Write = ' '
 Tab_Str = '   '
 End_Line = '\n'
-Data_Mined_File_Path = sys.path[0] + '/Data_Mined.txt '
-File_Result = open(Data_Mined_File_Path, 'w')
+Prepared_Data_File_Path = sys.path[0] + '/Prepared_Data.txt'
+File_Result = open(Prepared_Data_File_Path, 'w+')
 
 print(Number_Of_TV)
 
 for i in range(index_uv):
-    String_To_Write = Color_Temp_list[i] + Tab_Str + Factory_Comp_list[i] + Tab_Str + Value_list[i] + Tab_Str + u_list[
-        i] + Tab_Str + v_list[i] + Tab_Str + Lv_list[i] + Tab_Str + Tv_Number_list[i] + Tab_Str + WBA_Result_list[
-                          i] + End_Line
+    String_To_Write = Color_Temp_list[i] + Tab_Str + Factory_Comp_list[i] + Tab_Str + Value_list[i] + Tab_Str + \
+                      u_list[i] + Tab_Str + v_list[i] + Tab_Str + Lv_list[i] + Tab_Str + Tv_Number_list[i] + Tab_Str + \
+                      WBA_Result_list[i] + End_Line
     File_Result.writelines(String_To_Write)
 
-print(current_line_index)
+########################################################################################################################
 
+# Read Prepared_Data and split according to Color Temps 0,1,2
+file_name = 'Prepared_Data.txt'
+with open(os.path.join(sys.path[0], file_name), "r") as f:
+    listOfLines = f.read().splitlines()
+
+Total_Line_Numbers = len(listOfLines)
+
+print(Total_Line_Numbers)
+Color_Temp_list_0 = []
+Color_Temp_list_1 = []
+Color_Temp_list_2 = []
+
+index_Clr0 = 0
+index_Clr1 = 0
+index_Clr2 = 0
+
+current_line_index = -1
+while True:
+    current_line_index += 1
+    if current_line_index == Total_Line_Numbers:
+        break
+
+    current_line_str = listOfLines[current_line_index]
+    sub_str = current_line_str.split("   ")
+    if sub_str[0] == '0':
+        Color_Temp_list_0.insert(index_Clr0, current_line_str)
+        index_Clr0 += 1
+
+    if sub_str[0] == '1':
+        Color_Temp_list_1.insert(index_Clr1, current_line_str)
+        index_Clr1 += 1
+
+    if sub_str[0] == '2':
+        Color_Temp_list_2.insert(index_Clr2, current_line_str)
+        index_Clr2 += 1
+
+# Write ColorTemp_0 to disc
+Prepared_Data_File_Path_Clr0 = sys.path[0] + '/Prepared_Data_0.txt'
+File_Result = open(Prepared_Data_File_Path_Clr0, 'w+')
+for i in range(index_Clr0):
+    String_To_Write = Color_Temp_list_0[i] + End_Line
+    File_Result.writelines(String_To_Write)
+
+
+# Write ColorTemp_1 to disc
+Prepared_Data_File_Path_Clr1 = sys.path[0] + '/Prepared_Data_1.txt'
+File_Result = open(Prepared_Data_File_Path_Clr1, 'w+')
+for i in range(index_Clr1):
+    String_To_Write = Color_Temp_list_1[i] + End_Line
+    File_Result.writelines(String_To_Write)
+
+
+# Write ColorTemp_2 to disc
+Prepared_Data_File_Path_Clr2 = sys.path[0] + '/Prepared_Data_2.txt'
+File_Result = open(Prepared_Data_File_Path_Clr2, 'w+')
+for i in range(index_Clr1):
+    String_To_Write = Color_Temp_list_2[i] + End_Line
+    File_Result.writelines(String_To_Write)
+
+''''
+print(Color_Temp_list_0)
+
+
+
+
+print(current_line_index)
 print(Color_Temp_list)
 print(Factory_Comp_list)
 print(Value_list)
 print(u_list)
 print(v_list)
 print(Lv_list)
+'''
